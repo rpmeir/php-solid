@@ -1,0 +1,28 @@
+<?php
+
+namespace Src\Lsp;
+
+class PostgresDatabaseAdapter implements DatabaseConnection
+{
+    private ?\PDO $connection;
+
+    public function __construct() {
+        $this->connection = new \PDO(
+            "pgsql:dbname=postgres;host=127.0.0.1;port=5432",
+            "postgres",
+            "123456"
+        );
+    }
+
+    public function query(string $statement, array $parameters): array
+    {
+        $sth = $this->connection->prepare($statement);
+        $sth->execute($parameters);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function close(): void
+    {
+        $this->connection = null;
+    }
+}
