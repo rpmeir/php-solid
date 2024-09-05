@@ -14,8 +14,17 @@ class PostgresDatabaseAdapter implements DatabaseConnection
         );
     }
 
+    /**
+     * Summary of query
+     * @param string $statement
+     * @param array<int|string> $parameters
+     * @return array<array<string, string>>
+     */
     public function query(string $statement, array $parameters): array
     {
+        if (!$this->connection) {
+            throw new ConnectionException('Connection not established');
+        }
         $sth = $this->connection->prepare($statement);
         $sth->execute($parameters);
         return $sth->fetchAll(\PDO::FETCH_ASSOC);

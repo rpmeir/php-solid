@@ -20,7 +20,7 @@ class AverageRepositoryDatabase implements AverageRepository
             'SELECT student_id, value FROM lsp.averages WHERE student_id = ?',
             [$studentId]
         )[0];
-        return new Average(...$average);
+        return new Average((int) $average['student_id'], (float) $average['value']);
     }
 
     public function deleteAverageByStudentId(int $studentId): void
