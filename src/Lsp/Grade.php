@@ -7,6 +7,6 @@ class Grade
     public function __construct(
         public readonly int $student_id,
         public readonly string $exam,
-        public readonly int $value
+        public readonly float $value
     ) {}
 }

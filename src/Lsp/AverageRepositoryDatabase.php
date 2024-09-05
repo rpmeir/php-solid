@@ -22,4 +22,12 @@ class AverageRepositoryDatabase implements AverageRepository
         )[0];
         return new Average(...$average);
     }
+
+    public function deleteAverageByStudentId(int $studentId): void
+    {
+        $this->databaseConnection->query(
+            'DELETE FROM lsp.averages WHERE student_id = ?',
+            [$studentId]
+        );
+    }
 }

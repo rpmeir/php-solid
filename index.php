@@ -1,21 +1,14 @@
 <?php
 
-use Src\Lsp\AverageRepositoryDatabase;
-use Src\Lsp\CalculateAverage;
-use Src\Lsp\GetAverage;
-use Src\Lsp\GradeRepositoryDatabase;
-use Src\Lsp\PostgresDatabaseAdapter;
+use Src\Lsp\Grade;
+use Src\Lsp\RoundedArithmeticAverageCalculator;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$databaseConnection = new PostgresDatabaseAdapter();
-$gradeRepository = new GradeRepositoryDatabase($databaseConnection);
-$averageRepository = new AverageRepositoryDatabase($databaseConnection);
-$calculateAverage = new CalculateAverage($gradeRepository, $averageRepository);
-$studentId = 2410001;
-$calculateAverage->execute($studentId);
-$getAverage = new GetAverage($averageRepository);
-$output = $getAverage->execute($studentId);
-$databaseConnection->close();
+$grades = [];
+$grades[] = new Grade(2410002, 'exame', 5.7);
+$grades[] = new Grade(2410002, 'exame', 5.9);
+$averageCalculator = new RoundedArithmeticAverageCalculator();
+$output = $averageCalculator::calculate($grades);
 
 echo $output;

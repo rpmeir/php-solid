@@ -20,6 +20,16 @@ insert into lsp.grades (student_id, exam, value) values
 (2410001, 'P4',  6),
 (2410001, 'P5',  8);
 
+insert into lsp.grades (student_id, exam, value) values
+(2410002, 'P1', 5.7),
+(2410002, 'P2', 5.9);
+
+insert into lsp.grades (student_id, exam, value) values
+(2410004, 'P1', 10),
+(2410004, 'P2',  9),
+(2410004, 'P3',  6),
+(2410004, 'P4',  2);
+
 create table if not exists lsp.averages (
     student_id integer,
     value numeric
