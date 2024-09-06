@@ -2,7 +2,7 @@
 
 namespace Src\Lsp;
 
-class ArithmeticAverageCalculator implements AverageCalculator
+class AverageCalculatorTypeB implements AverageCalculator
 {
     /**
      * Summary of calculate
@@ -14,8 +14,10 @@ class ArithmeticAverageCalculator implements AverageCalculator
         if (empty($grades)) { return 0; }
         $sum = 0;
         foreach ($grades as $grade) {
+            if ($grade->value > 10) { throw new InvalidGradeException("Invalid Grade", 1); }
             $sum += $grade->value;
         }
-        return $sum / count($grades);
+        $average = round($sum / count($grades));
+        return ($average >= 5.75 && $average <= 6.0) ? 6.0 : $average;
     }
 }

@@ -2,15 +2,18 @@
 
 namespace Src\Lsp;
 
+use Dotenv\Dotenv;
+
 class PostgresDatabaseAdapter implements DatabaseConnection
 {
     private ?\PDO $connection;
 
     public function __construct() {
+        Dotenv::createImmutable(__DIR__ . '/../..')->load();
         $this->connection = new \PDO(
             "pgsql:dbname=postgres;host=127.0.0.1;port=5432",
             "postgres",
-            "123456"
+            $_ENV['POSTGRES_PASSWORD']
         );
     }
 

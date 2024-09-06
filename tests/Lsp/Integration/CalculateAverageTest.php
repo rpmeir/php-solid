@@ -2,7 +2,9 @@
 
 namespace Tests\Lsp\Integration;
 
-use Src\Lsp\ArithmeticAverageCalculator;
+use Src\Lsp\AverageCalculatorTypeA;
+use Src\Lsp\AverageCalculatorTypeB;
+use Src\Lsp\AverageCalculatorTypeC;
 use Src\Lsp\AverageRepositoryDatabase;
 use Src\Lsp\CalculateAverage;
 use Src\Lsp\GetAverage;
@@ -14,7 +16,7 @@ test('Deve calcular a média de um aluno', function () {
     $databaseConnection = new PostgresDatabaseAdapter();
     $gradeRepository = new GradeRepositoryDatabase($databaseConnection);
     $averageRepository = new AverageRepositoryDatabase($databaseConnection);
-    $averageCalculator = new ArithmeticAverageCalculator();
+    $averageCalculator = new AverageCalculatorTypeA();
     $calculateAverage = new CalculateAverage(
         $gradeRepository,
         $averageRepository,
@@ -32,7 +34,7 @@ test('Deve calcular a média arredondada para cima de um aluno', function () {
     $databaseConnection = new PostgresDatabaseAdapter();
     $gradeRepository = new GradeRepositoryDatabase($databaseConnection);
     $averageRepository = new AverageRepositoryDatabase($databaseConnection);
-    $averageCalculator = new RoundedArithmeticAverageCalculator();
+    $averageCalculator = new AverageCalculatorTypeB();
     $calculateAverage = new CalculateAverage(
         $gradeRepository,
         $averageRepository,
@@ -51,7 +53,7 @@ test('Deve calcular a média de um aluno sem notas', function () {
     $gradeRepository = new GradeRepositoryDatabase($databaseConnection);
     $averageRepository = new AverageRepositoryDatabase($databaseConnection);
 
-    $averageCalculator = new ArithmeticAverageCalculator();
+    $averageCalculator = new AverageCalculatorTypeA();
     $calculateAverage = new CalculateAverage(
         $gradeRepository,
         $averageRepository,
@@ -63,7 +65,19 @@ test('Deve calcular a média de um aluno sem notas', function () {
     $output = $getAverage->execute($studentId);
     expect($output)->toBe(0.0);
 
-    $roundedAverageCalculator = new RoundedArithmeticAverageCalculator();
+    $roundedAverageCalculator = new AverageCalculatorTypeB();
+    $calculateAverage = new CalculateAverage(
+        $gradeRepository,
+        $averageRepository,
+        $roundedAverageCalculator);
+    $studentId = 2410003;
+    $averageRepository->deleteAverageByStudentId($studentId);
+    $calculateAverage->execute($studentId);
+    $getAverage = new GetAverage($averageRepository);
+    $output = $getAverage->execute($studentId);
+    expect($output)->toBe(0.0);
+
+    $roundedAverageCalculator = new AverageCalculatorTypeC();
     $calculateAverage = new CalculateAverage(
         $gradeRepository,
         $averageRepository,
@@ -82,7 +96,7 @@ test('Deve calcular a média de um aluno com uma nota muito baixa, desconsideran
     $databaseConnection = new PostgresDatabaseAdapter();
     $gradeRepository = new GradeRepositoryDatabase($databaseConnection);
     $averageRepository = new AverageRepositoryDatabase($databaseConnection);
-    $averageCalculator = new ArithmeticAverageCalculator();
+    $averageCalculator = new AverageCalculatorTypeC();
     $calculateAverage = new CalculateAverage(
         $gradeRepository,
         $averageRepository,
@@ -92,6 +106,6 @@ test('Deve calcular a média de um aluno com uma nota muito baixa, desconsideran
     $calculateAverage->execute($studentId);
     $getAverage = new GetAverage($averageRepository);
     $output = $getAverage->execute($studentId);
-    expect($output)->toBe(8.0);
+    expect($output)->toBe(7.5);
     $databaseConnection->close();
 });
