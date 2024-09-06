@@ -10,7 +10,6 @@ use Src\Lsp\CalculateAverage;
 use Src\Lsp\GetAverage;
 use Src\Lsp\GradeRepositoryDatabase;
 use Src\Lsp\PostgresDatabaseAdapter;
-use Src\Lsp\RoundedArithmeticAverageCalculator;
 
 test('Deve calcular a média de um aluno', function () {
     $databaseConnection = new PostgresDatabaseAdapter();
