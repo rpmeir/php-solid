@@ -2,6 +2,8 @@
 
 namespace Src\Ocp;
 
+use Src\DatabaseConnection;
+
 class ReservationRepositoryDatabase implements ReservationRepository
 {
     public function __construct(public readonly DatabaseConnection $databaseConnection) {}

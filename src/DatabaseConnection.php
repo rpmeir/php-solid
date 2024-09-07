@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Lsp;
+namespace Src;
 
 interface DatabaseConnection
 {

@@ -2,6 +2,8 @@
 
 namespace Src\Lsp;
 
+use Src\DatabaseConnection;
+
 class AverageRepositoryDatabase implements AverageRepository
 {
     public function __construct(public readonly DatabaseConnection $databaseConnection) {}

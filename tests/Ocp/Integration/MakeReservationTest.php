@@ -5,9 +5,9 @@ namespace Tests\Ocp\Integration;
 use Src\Ocp\GetReservation;
 use Src\Ocp\MakeReservation;
 use Src\Ocp\MakeReservationInput;
-use Src\Ocp\PostgresDatabaseAdapter;
 use Src\Ocp\ReservationRepositoryDatabase;
 use Src\Ocp\RoomRepositoryDatabase;
+use Src\PostgresDatabaseAdapter;
 
 test("Deve fazer uma reserva, de um quarto com pagamento por dia", function () {
     $databaseConnection = new PostgresDatabaseAdapter();

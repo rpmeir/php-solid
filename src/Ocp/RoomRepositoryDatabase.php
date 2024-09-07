@@ -2,6 +2,8 @@
 
 namespace Src\Ocp;
 
+use Src\DatabaseConnection;
+
 class RoomRepositoryDatabase implements RoomRepository
 {
     public function __construct(public readonly DatabaseConnection $databaseConnection) {}
