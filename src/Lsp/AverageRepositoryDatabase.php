@@ -16,10 +16,10 @@ class AverageRepositoryDatabase implements AverageRepository
 
     public function getAverageByStudentId(int $studentId): Average
     {
-        $average = $this->databaseConnection->query(
+        [$average] = $this->databaseConnection->query(
             'SELECT student_id, value FROM lsp.averages WHERE student_id = ?',
             [$studentId]
-        )[0];
+        );
         return new Average((int) $average['student_id'], (float) $average['value']);
     }
 
