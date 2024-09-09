@@ -23,3 +23,10 @@ Liskov Substitution Principle:
 Open/Closed Principle:
 
 [https://www.youtube.com/watch?v=eaCAykuD13o](https://www.youtube.com/watch?v=eaCAykuD13o)
+
+
+## DIP
+
+ Dependency Inversion Principle
+
+ [https://www.youtube.com/watch?v=9JBU-Fh3bz4](https://www.youtube.com/watch?v=9JBU-Fh3bz4)
