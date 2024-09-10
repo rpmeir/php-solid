@@ -14,7 +14,7 @@ class TicketRepositoryDatabase implements TicketRepository
     public function getTicketById(string $ticketId): Ticket
     {
         [$ticket] = $this->databaseConnection->query(
-            'SELECT * FROM dip.tickets WHERE ticket_id = $1',
+            'SELECT * FROM dip.tickets WHERE ticket_id = ?',
             [$ticketId]
         );
         return new Ticket($ticket['ticket_id'], $ticket['event_id'], $ticket['email'], $ticket['price']);
@@ -23,7 +23,7 @@ class TicketRepositoryDatabase implements TicketRepository
     public function saveTicket(Ticket $ticket): void
     {
         $this->databaseConnection->query(
-            'INSERT INTO dip.tickets (ticket_id, event_id, email, price) VALUES ($1, $2, $3, $4)',
+            'INSERT INTO dip.tickets (ticket_id, event_id, email, price) VALUES (?, ?, ?, ?)',
             [$ticket->ticketId, $ticket->eventId, $ticket->email, $ticket->price]
         );
     }

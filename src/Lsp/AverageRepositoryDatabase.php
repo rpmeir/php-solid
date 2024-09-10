@@ -11,7 +11,7 @@ class AverageRepositoryDatabase implements AverageRepository
     public function save(Average $average): void
     {
         $this->databaseConnection->query(
-            'INSERT INTO lsp.averages (student_id, value) VALUES (:student_id, :value)',
+            'INSERT INTO lsp.averages (student_id, value) VALUES (?, ?)',
             [$average->student_id, $average->value]
         );
     }
