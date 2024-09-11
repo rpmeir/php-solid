@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
-class Email {
+class Email
+{
     private string $value;
 
     public function __construct(public readonly string $email)
     {
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException('Invalid email');
         }
         $this->value = $email;

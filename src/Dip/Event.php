@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
 class Event
@@ -8,5 +10,6 @@ class Event
         public readonly string $eventId,
         public readonly string $description,
         public readonly float $price
-    ) {}
+    ) {
+    }
 }

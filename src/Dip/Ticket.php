@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
 use Ramsey\Uuid\Uuid;
@@ -17,7 +19,7 @@ class Ticket
         $this->email = new Email($emailString);
 
         // validate price
-        if($price <= 0) {
+        if ($price <= 0) {
             throw new \InvalidArgumentException('Invalid price');
         }
     }

@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
 use Src\DatabaseConnection;
 
 class TicketRepositoryDatabase implements TicketRepository
 {
-
     public function __construct(private readonly DatabaseConnection $databaseConnection)
     {
     }

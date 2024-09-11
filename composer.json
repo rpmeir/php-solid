@@ -23,9 +23,11 @@
     "scripts": {
         "rall": [
             "@test",
-            "@lint"
+            "@lint",
+            "@insights"
         ],
         "test": "vendor/bin/pest",
-        "lint": "vendor/bin/phpstan analyse src tests --level max"
+        "lint": "vendor/bin/phpstan analyse src tests --level max",
+        "insights": "vendor/bin/phpinsights"
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 abstract class PriceCalculator
@@ -8,8 +10,7 @@ abstract class PriceCalculator
         \DateTimeImmutable $checkinDate,
         \DateTimeImmutable $checkoutDate,
         float $roomPrice
-    ): PriceCalculatorOutput
-    {
+    ): PriceCalculatorOutput {
         $duration = $this->calculateDuration($checkinDate, $checkoutDate);
         $price = $roomPrice * $duration;
         return new PriceCalculatorOutput(

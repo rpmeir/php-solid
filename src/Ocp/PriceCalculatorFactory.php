@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 class PriceCalculatorFactory
 {
-    public static function create (string $type): PriceCalculator
+    public static function create(string $type): PriceCalculator
     {
         return match ($type) {
             'hour' => new HourPriceCalculator(),

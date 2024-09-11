@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 use Ramsey\Uuid\Uuid;
@@ -15,15 +17,15 @@ class Reservation
         private int $duration,
         private float $price,
         private readonly string $status
-    ) {}
+    ) {
+    }
 
     public static function create(
         string $roomId,
         string $email,
         \DateTimeImmutable $checkinDate,
         \DateTimeImmutable $checkoutDate
-    ): Reservation
-    {
+    ): Reservation {
         $uuid = Uuid::uuid4()->toString();
         $duration = 0;
         $price = 0;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
 class GetTicket
@@ -15,5 +17,4 @@ class GetTicket
     {
         return $this->ticketRepository->getTicketById($ticketId);
     }
-
 }

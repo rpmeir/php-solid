@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 use Src\DatabaseConnection;
 
 class RoomRepositoryDatabase implements RoomRepository
 {
-    public function __construct(public readonly DatabaseConnection $databaseConnection) {}
+    public function __construct(public readonly DatabaseConnection $databaseConnection)
+    {
+    }
 
     public function get(string $roomId): Room
     {

@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Lsp;
 
-class CalculateAverage {
+class CalculateAverage
+{
     public function __construct(
         public readonly GradeRepository $gradeRepository,
         public readonly AverageRepository $averageRepository,
-        public readonly AverageCalculator $averageCalculator)
-    {
+        public readonly AverageCalculator $averageCalculator
+    ) {
     }
 
     public function execute(int $studentId): void

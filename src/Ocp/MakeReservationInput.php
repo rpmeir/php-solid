@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 class MakeReservationInput
@@ -9,5 +11,6 @@ class MakeReservationInput
         public readonly string $email,
         public readonly \DateTimeImmutable $checkinDate,
         public readonly \DateTimeImmutable $checkoutDate
-    ) {}
+    ) {
+    }
 }

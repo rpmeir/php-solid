@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Lsp;
 
 class Grade
@@ -8,5 +10,6 @@ class Grade
         public readonly int $student_id,
         public readonly string $exam,
         public readonly float $value
-    ) {}
+    ) {
+    }
 }

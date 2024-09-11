@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Ocp;
 
 use Src\DatabaseConnection;
 
 class ReservationRepositoryDatabase implements ReservationRepository
 {
-    public function __construct(public readonly DatabaseConnection $databaseConnection) {}
+    public function __construct(public readonly DatabaseConnection $databaseConnection)
+    {
+    }
 
     public function save(Reservation $reservation): void
     {
@@ -21,7 +25,7 @@ class ReservationRepositoryDatabase implements ReservationRepository
                 $reservation->checkoutDate->format('Y-m-d H:i:s'),
                 $reservation->getDuration(),
                 $reservation->getPrice(),
-                $reservation->getStatus()
+                $reservation->getStatus(),
             ]
         );
     }

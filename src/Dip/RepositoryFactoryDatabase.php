@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
+
 use Src\DatabaseConnection;
 
 class RepositoryFactoryDatabase implements RepositoryFactory

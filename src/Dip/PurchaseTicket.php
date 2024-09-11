@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Dip;
 
 class PurchaseTicket
@@ -15,8 +17,8 @@ class PurchaseTicket
 
     /**
      * Summary of execute
+     *
      * @param array<string, string> $input
-     * @return PurchaseTicketOutput
      */
     public function execute(array $input): PurchaseTicketOutput
     {

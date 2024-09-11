@@ -1,16 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Lsp;
 
 use Src\DatabaseConnection;
 
 class GradeRepositoryDatabase implements GradeRepository
 {
-    public function __construct(public readonly DatabaseConnection $databaseConnection) {}
+    public function __construct(public readonly DatabaseConnection $databaseConnection)
+    {
+    }
 
     /**
      * Summary of getGradesByStudentId
-     * @param int $studentId
+     *
      * @return array<Grade>
      */
     public function getGradesByStudentId(int $studentId): array
@@ -20,11 +24,12 @@ class GradeRepositoryDatabase implements GradeRepository
             [$studentId]
         );
         return array_map(
-            function($grade) {
-            return new Grade(
-                (int) $grade['student_id'],
-                (string) $grade['exam'],
-                (float) $grade['value']);
+            static function ($grade) {
+                return new Grade(
+                    (int) $grade['student_id'],
+                    (string) $grade['exam'],
+                    (float) $grade['value']
+                );
             },
             $grades
         );
