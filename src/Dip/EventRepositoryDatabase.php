@@ -16,6 +16,6 @@ class EventRepositoryDatabase implements EventRepository
             'SELECT * FROM dip.events WHERE event_id = ?',
             [$eventId]
         );
-        return new Event($eventData['event_id'], $eventData['description'], $eventData['price']);
+        return new Event((string) $eventData['event_id'], (string) $eventData['description'], (float) $eventData['price']);
     }
 }

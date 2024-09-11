@@ -4,8 +4,11 @@ namespace Src\Dip;
 
 class GetTicket
 {
-    public function __construct(public readonly TicketRepository $ticketRepository)
+    private TicketRepository $ticketRepository;
+
+    public function __construct(public readonly RepositoryFactory $repositoryFactory)
     {
+        $this->ticketRepository = $repositoryFactory->createTicketRepository();
     }
 
     public function execute(string $ticketId): Ticket

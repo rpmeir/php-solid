@@ -2,21 +2,26 @@
 
 namespace Src\Dip;
 
-use Ramsey\Uuid\Uuid;
-
 class PurchaseTicket
 {
-    public function __construct(
-        public readonly TicketRepository $ticketRepository,
-        public readonly EventRepository $eventRepository)
+    private EventRepository $eventRepository;
+    private TicketRepository $ticketRepository;
+
+    public function __construct(public readonly RepositoryFactory $repositoryFactory)
     {
+        $this->eventRepository = $repositoryFactory->createEventRepository();
+        $this->ticketRepository = $repositoryFactory->createTicketRepository();
     }
 
-    public function execute(array $input): object
+    /**
+     * Summary of execute
+     * @param array<string, string> $input
+     * @return PurchaseTicketOutput
+     */
+    public function execute(array $input): PurchaseTicketOutput
     {
         $event = $this->eventRepository->getEventById($input['eventId']);
-        $ticket = new Ticket(
-            Uuid::uuid4()->toString(),
+        $ticket = Ticket::create(
             $input['eventId'],
             $input['email'],
             $event->price
