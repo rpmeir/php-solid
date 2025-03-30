@@ -1,8 +1,8 @@
 {
     "require-dev": {
-        "phpstan/phpstan": "^1.12",
-        "pestphp/pest": "^2.35",
-        "nunomaduro/phpinsights": "^2.11"
+        "phpstan/phpstan": "^2",
+        "pestphp/pest": "^3",
+        "nunomaduro/phpinsights": "^2"
     },
     "config": {
         "allow-plugins": {
@@ -18,7 +18,10 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.6",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "guzzlehttp/guzzle": "^7.9",
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.7"
     },
     "scripts": {
         "rall": [
@@ -26,7 +29,8 @@
             "@lint",
             "@insights"
         ],
-        "test": "vendor/bin/pest",
+        "test": "vendor/bin/pest --coverage",
+        "test:compact": "vendor/bin/pest --coverage --compact",
         "lint": "vendor/bin/phpstan analyse src tests --level max",
         "insights": "vendor/bin/phpinsights"
     }
