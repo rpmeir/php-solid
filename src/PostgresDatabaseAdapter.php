@@ -8,16 +8,20 @@ use Dotenv\Dotenv;
 
 class PostgresDatabaseAdapter implements DatabaseConnection
 {
+    private string $dbname;
+    private string $host;
+    private string $port;
     private ?\PDO $connection;
 
     public function __construct()
     {
-        Dotenv::createImmutable(__DIR__ . '/..')->load();
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+        $dotenv->load();
 
-        $dbname = $_ENV['DATABASE_NAME'];
-        $host = $_ENV['DATABASE_HOST'];
-        $port = $_ENV['DATABASE_PORT'];
-        $dsn = "pgsql:dbname={$dbname};host={$host};port={$port}";
+        $this->dbname = $_ENV['DATABASE_NAME'];
+        $this->host = $_ENV['DATABASE_HOST'];
+        $this->port = $_ENV['DATABASE_PORT'];
+        $dsn = "pgsql:dbname={$this->dbname};host={$this->host};port={$this->port}";
 
         $this->connection = new \PDO(
             $dsn,
@@ -31,7 +35,7 @@ class PostgresDatabaseAdapter implements DatabaseConnection
      *
      * @param array<int|float|string> $parameters
      *
-     * @return array<array<string, int|float|string>>
+     * @return array
      */
     public function query(string $statement, array $parameters): array
     {
@@ -41,6 +45,21 @@ class PostgresDatabaseAdapter implements DatabaseConnection
         $sth = $this->connection->prepare($statement);
         $sth->execute($parameters);
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Summary of execute
+     *
+     * @param array<int|float|string> $parameters
+     */
+    public function execute(string $statement, array $parameters): int
+    {
+        if (! $this->connection) {
+            throw new ConnectionException('Connection not established');
+        }
+        $sth = $this->connection->prepare($statement);
+        $sth->execute($parameters);
+        return $sth->rowCount();
     }
 
     public function close(): void

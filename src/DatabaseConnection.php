@@ -14,5 +14,6 @@ interface DatabaseConnection
      * @return array<array<string, string|int|float>>
      */
     public function query(string $statement, array $parameters): array;
+    public function execute(string $statement, array $parameters): int;
     public function close(): void;
 }
