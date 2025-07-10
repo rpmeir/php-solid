@@ -2,9 +2,11 @@
 
 namespace Tests\Lsp\Unit;
 
-use Src\Lsp\AverageCalculatorTypeA;
-use Src\Lsp\AverageCalculatorTypeB;
-use Src\Lsp\Grade;
+use Src\Lsp\Application\UseCase\AverageCalculatorTypeA;
+use Src\Lsp\Application\UseCase\AverageCalculatorTypeB;
+use Src\Lsp\Domain\Grade;
+
+pest()->group('unit', 'lsp');
 
 test('Deve calcular a média aritmética de um aluno', function () {
     $grades = [];

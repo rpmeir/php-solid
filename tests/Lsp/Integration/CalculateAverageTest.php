@@ -2,14 +2,16 @@
 
 namespace Tests\Lsp\Integration;
 
-use Src\Lsp\AverageCalculatorTypeA;
-use Src\Lsp\AverageCalculatorTypeB;
-use Src\Lsp\AverageCalculatorTypeC;
-use Src\Lsp\AverageRepositoryDatabase;
-use Src\Lsp\CalculateAverage;
-use Src\Lsp\GetAverage;
-use Src\Lsp\GradeRepositoryDatabase;
+use Src\Lsp\Application\UseCase\AverageCalculatorTypeA;
+use Src\Lsp\Application\UseCase\AverageCalculatorTypeB;
+use Src\Lsp\Application\UseCase\AverageCalculatorTypeC;
+use Src\Lsp\Infra\AverageRepositoryDatabase;
+use Src\Lsp\Application\UseCase\CalculateAverage;
+use Src\Lsp\Application\UseCase\GetAverage;
+use Src\Lsp\Infra\GradeRepositoryDatabase;
 use Src\PostgresDatabaseAdapter;
+
+pest()->group('integration', 'lsp');
 
 test('Deve calcular a média de um aluno', function () {
     $databaseConnection = new PostgresDatabaseAdapter();

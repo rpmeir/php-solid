@@ -2,16 +2,18 @@
 
 namespace Tests\Dip\Integration;
 
-use Src\Dip\GetTicket;
-use Src\Dip\PurchaseTicket;
-use Src\Dip\RepositoryFactoryDatabase;
-use Src\Dip\RepositoryFactoryFake;
+use Src\Dip\Application\UseCases\GetTicket;
+use Src\Dip\Application\UseCases\PurchaseTicket;
+use Src\Dip\Infra\Database\RepositoryFactoryDatabase;
+use Src\Dip\Infra\Fake\RepositoryFactoryFake;
 use Src\PostgresDatabaseAdapter;
 
 test('Deve comprar um ingresso para o evento', function () {
     // given
     $databaseConnection = new PostgresDatabaseAdapter();
-    $repositoryFactory = new RepositoryFactoryDatabase($databaseConnection); // new RepositoryFactoryFake()
+    $repositoryFactory = new RepositoryFactoryDatabase($databaseConnection);
+    // OR
+    //$repositoryFactory = new RepositoryFactoryFake(); // whithout databaseConnection parameter
     $purchaseTicket = new PurchaseTicket($repositoryFactory);
     $getTicket = new GetTicket($repositoryFactory);
     $inputPurchaseTicket = [
@@ -28,4 +30,4 @@ test('Deve comprar um ingresso para o evento', function () {
     expect($outputGetTicket->getEmail())->toBe($inputPurchaseTicket['email']);
     expect($outputGetTicket->price)->toBe(100.0);
     $databaseConnection->close();
-});
+})->group('integration', 'dip', 'purchase-ticket');

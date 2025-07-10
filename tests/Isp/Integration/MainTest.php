@@ -28,4 +28,4 @@ test('Deve fazer um pedido', function ()
     expect($outputGetOrder['total'])->toBe(2000);
     expect($outputGetOrder['totalInUsd'])->toBe(12000);
     expect($outputGetOrder['status'])->toBe('paid');
-})->only();
+})->group('integration', 'isp');
